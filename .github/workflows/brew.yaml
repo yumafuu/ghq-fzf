@@ -23,7 +23,7 @@ jobs:
       - name: Generate Homebrew Formula
         run: |
           VERSION=${{ github.event.release.tag_name }}
-          BASE_URL=https://github.com/yumafuu/ghq-fzf/releases/download/${VERSION}/
+          BASE_URL=https://github.com/yumafuu/ghq-fzf/releases/download/${VERSION}
 
           SHA_LINUX_X64=$(curl -sL ${BASE_URL}/linux-x64 | shasum -a 256 | awk '{print $1}')
           SHA_LINUX_ARM64=$(curl -sL ${BASE_URL}/linux-arm64 | shasum -a 256 | awk '{print $1}')
@@ -41,7 +41,7 @@ jobs:
                 sha256 "$SHA_DARWIN_X64"
 
                 def install
-                  bin.install "_ghq-fzf"
+                  bin.install "darwin-x64" => "_ghq-fzf"
                 end
               end
               on_arm do
@@ -49,7 +49,7 @@ jobs:
                 sha256 "$SHA_DARWIN_ARM64"
 
                 def install
-                  bin.install "_ghq-fzf"
+                  bin.install "darwin-arm64" => "_ghq-fzf"
                 end
               end
             end
@@ -61,7 +61,7 @@ jobs:
                   sha256 "$SHA_LINUX_X64"
 
                   def install
-                    bin.install "_ghq-fzf"
+                    bin.install "linux-x64" => "_ghq-fzf"
                   end
                 end
               end
@@ -71,7 +71,7 @@ jobs:
                   sha256 "$SHA_LINUX_ARM64"
 
                   def install
-                    bin.install "_ghq-fzf"
+                    bin.install "linux-arm64" => "_ghq-fzf"
                   end
                 end
               end
