@@ -1,0 +1,75 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  compile:
+    name: Release Packages
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target:
+          - linux-x64
+          - linux-arm64
+          - darwin-x64
+          - darwin-arm64
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Compile
+        run: |
+          bun build ./cli.ts --compile --target=bun-${{ matrix.target }} --outfile _ghq-fzf
+          tar -czvf ${{ matrix.target }}.tar.gz _ghq-fzf
+
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.target }}
+          path: ${{ matrix.target }}.tar.gz
+
+  release:
+    name: Release Packages
+    runs-on: ubuntu-latest
+    needs:
+      - compile
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get tag name
+        id: gettagname
+        run: |
+          echo ${{ github.ref_name }} | sed -e 's/^v//' | xargs -I {} echo "tagname={}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-x64
+          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-amd64.tar.gz
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-arm64
+          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-ard64.tar.gz
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: darwin-x64
+          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-darwin-amd64.tar.gz
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: darwin-arm64
+          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-darwin-arm64.tar.gz
+
+      - name: Release
+        uses: fnkr/github-action-ghr@v1
+        env:
+          GHR_PATH: release/
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
