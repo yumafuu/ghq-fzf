@@ -1,8 +1,9 @@
-import { config } from "../config";
+import { GetConfig } from "../config";
 import type { Command } from ".";
 import { GetDirs } from "../directory";
 
 export const Run: Command = async ($) => {
+  const config = await GetConfig();
   const dirs = await GetDirs($);
   const fzfitem = dirs.map((item) => item.display).join("\n");
 

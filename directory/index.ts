@@ -1,4 +1,4 @@
-import { config } from "../config";
+import { GetConfig } from "../config";
 
 type Item = {
   fullpath: string;
@@ -6,6 +6,8 @@ type Item = {
 };
 
 export const GetDirs = async ($): Promise<Item[]> => {
+  const config = await GetConfig();
+
   const ghqroot = (await $`ghq root`.text()).trim();
   const ghqlist = (await $`ghq list`.text()).split("\n").filter(Boolean);
 
