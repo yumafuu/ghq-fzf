@@ -68,6 +68,10 @@ jobs:
           name: darwin-arm64
           path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-darwin-arm64.tar.gz
 
+      - name: DEBUG
+        run: |
+          ls -la release/
+
       - name: Release
         uses: fnkr/github-action-ghr@v1
         env:
