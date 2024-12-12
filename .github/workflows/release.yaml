@@ -25,15 +25,13 @@ jobs:
 
       - name: Compile
         run: |
-          bun i
-          bun build ./cli.ts --compile --target=bun-${{ matrix.target }} --outfile _ghq-fzf
-          tar -czvf ${{ matrix.target }}.tar.gz _ghq-fzf
+          bun i && bun build ./cli.ts --compile --target=bun-${{ matrix.target }} --outfile ${{ matrix.target }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.target }}
-          path: ${{ matrix.target }}.tar.gz
+          path: ${{ matrix.target }}
 
   release:
     name: Release Packages
@@ -43,38 +41,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Get tag name
-        id: gettagname
-        run: |
-          echo "tagname=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux-x64
-          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-amd64.tar.gz
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: linux-arm64
-          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-arm64.tar.gz
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: darwin-x64
-          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-darwin-amd64.tar.gz
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: darwin-arm64
-          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-darwin-arm64.tar.gz
-
-      - name: DEBUG
-        run: |
-          ls -la release/
+      - { uses: actions/download-artifact@v4, with: { name: linux-x64,     path: release/ } }
+      - { uses: actions/download-artifact@v4, with: { name: linux-arm64,   path: release/ } }
+      - { uses: actions/download-artifact@v4, with: { name: darwin-x64,    path: release/ } }
+      - { uses: actions/download-artifact@v4, with: { name: darwin-arm64,  path: release/ } }
 
       - name: Release
         uses: fnkr/github-action-ghr@v1
         env:
           GHR_PATH: release/
-          GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
