@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "compile": "bun build ./cli.ts --compile --outfile _ghq-fzf"
+  },
+  "dependencies": {
+    "yaml": "^2.6.1"
+  }
+}
