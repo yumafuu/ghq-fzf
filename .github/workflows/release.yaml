@@ -72,6 +72,7 @@ jobs:
         uses: fnkr/github-action-ghr@v1
         env:
           GHR_PATH: release/
+          GHR_REPLACE: true
           GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
 
   homebrew-release:
@@ -85,23 +86,13 @@ jobs:
         with:
           homebrew_owner: yumafuu
           homebrew_tap: homebrew-tap
-          formula_folder: .
+          formula_folder: "."
           github_token: ${{ secrets.TAP_GITHUB_TOKEN }}
           commit_owner: yumafuu
           commit_email: yuma.fuu05@gmail.com
-          # Install command for your formula.
-          # Required - string
           install: 'bin.install "_ghq-fzf"'
-
-          # Adds URL and checksum targets for different OS and architecture pairs. Using this option assumes
-          # a tar archive exists on your GitHub repo with the following URL pattern (this cannot be customized):
-          # https://github.com/{GITHUB_OWNER}/{REPO_NAME}/releases/download/{TAG}/{REPO_NAME}-{VERSION}-{OPERATING_SYSTEM}-{ARCHITECTURE}.tar.gz'
-          # Darwin AMD pre-existing path example: https://github.com/justintime50/myrepo/releases/download/v1.2.0/myrepo-1.2.0-darwin-amd64.tar.gz
-          # Linux ARM pre-existing path example: https://github.com/justintime50/myrepo/releases/download/v1.2.0/myrepo-1.2.0-linux-arm64.tar.gz
-          # Optional - booleans
           target_darwin_amd64: true
           target_darwin_arm64: true
           target_linux_amd64: true
           target_linux_arm64: true
-
           skip_commit: false
