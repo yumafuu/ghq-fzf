@@ -13,5 +13,6 @@ let command = positionals[0];
 if (!command) {
   command = "help";
 }
+const args = positionals.slice(1);
 
-Runner(command, $);
+Runner($, command, args);
