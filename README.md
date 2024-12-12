@@ -1,5 +1,3 @@
-⚠️ THIS IS NOT WORK YET
-
 # ghq-fzf
 
 This is a simple tool to select ghq repositories using fzf
