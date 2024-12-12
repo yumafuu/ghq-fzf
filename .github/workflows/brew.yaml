@@ -80,7 +80,7 @@ jobs:
 
       - name: Push Formula to Homebrew Tap
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
         run: |
           TAP_REPO=yumafuu/homebrew-tap
 
