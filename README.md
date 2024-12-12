@@ -18,7 +18,7 @@ $ brew install yumafuu/tap/ghq-fzf
 
 ## Usage
 
-This tool cannot be used directly because it involves cd operations. The binary _ghq-fzf will be installed, so you will need to configure your own environment for cd.
+This tool cannot be used directly because it involves cd operations. The binary `_ghq-fzf` will be installed, so you will need to configure your own environment for cd.
 
 ```sh
 # .bashrc or .zshrc
@@ -42,4 +42,23 @@ ghq-fzf() {
 
 zle -N ghq-fzf
 bindkey "^o" ghq-fzf
+```
+
+## Configuration
+
+First look for `GHQ_FZF_CONFIG` and if the file is not there, look for it in the following order.
+- `$XDG_CONFIG_HOME/ghq-fzf/config.yaml`
+- `$HOME/.config/ghq-fzf/config.yaml`
+
+If no file was found, create it in the final hit location.
+
+Here is my sample.
+```yaml
+fzf:
+  # preview: "bat $(_ghq-fzf fullpath {})/README.md"
+  preview: "exa --tree -L 1 $(_ghq-fzf fullpath {})"
+dirs:
+  - ~/Downloads
+  - ~/dotfiles
+  - ~/
 ```

@@ -1,32 +1,19 @@
 import { config } from "../config";
-import type { Command } from "./index";
+import type { Command } from ".";
+import { GetDirs } from "../directory";
 
-type Item = {
-  fullpath: string;
-  display: string;
-};
+export const Run: Command = async ($) => {
+  const dirs = await GetDirs($);
+  const fzfitem = dirs.map((item) => item.display).join("\n");
 
-export const RunCommand: Command = async ($) => {
-  const ghqroot = (await $`ghq root`.text()).trim();
-  const ghqlist = (await $`ghq list`.text()).split("\n").filter(Boolean);
-
-  const list: Item[] = [];
-  for (const ghqitem of ghqlist) {
-    list.push({ fullpath: `${ghqroot}/${ghqitem}`, display: ghqitem });
-  }
-
-  for (const dir of config.dirs) {
-    list.push({ fullpath: dir, display: dir });
-  }
-
-  const fzfitem = list.map((item) => item.display).join("\n");
+  const preview = config.fzf?.preview || "echo {}";
 
   const selected =
-    (await $`echo ${fzfitem} | fzf --preview '${config.fzf.preview}'`.text())
+    (await $`echo ${fzfitem} | fzf --preview '${preview}'`.text())
       .trim();
 
   if (selected) {
-    const item = list.find((item) => item.display === selected);
+    const item = dirs.find((item) => item.display === selected);
     if (!item) {
       console.error("Item not found");
       return
