@@ -20,7 +20,6 @@ This tool cannot be used directly because it involves cd operations. The binary 
 
 ```sh
 # .bashrc or .zshrc
-
 ghq-fzf(){ eval $(_ghq-fzf run) }
 ```
 And then you can use the following command to select a repository.
