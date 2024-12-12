@@ -80,8 +80,8 @@ jobs:
 
           git clone https://github.com/$TAP_REPO.git
 
+          mv ghq-fzf.rb homebrew-tap/ghq-fzf.rb
           cd homebrew-tap
-          mv ghq-fzf.rb ghq-fzf.rb
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
