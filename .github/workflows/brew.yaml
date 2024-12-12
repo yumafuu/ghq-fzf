@@ -9,11 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the repository
+      - name: Checkout homebrew-tap repo
         uses: actions/checkout@v4
+        with:
+          repository: "yumafuu/homebrew-tap"
+          fetch-depth: 0
+          path: homebrew-tap
 
       - name: Generate Homebrew Formula
-        id: generate_formula
         run: |
           VERSION=${{ github.event.release.tag_name }}
           BASE_URL=https://github.com/yumafuu/ghq-fzf/releases/download/${VERSION}/
@@ -77,8 +80,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: |
           TAP_REPO=yumafuu/homebrew-tap
-
-          git clone git@github.com:$TAP_REPO.git
 
           mv ghq-fzf.rb homebrew-tap/ghq-fzf.rb
           cd homebrew-tap
