@@ -46,7 +46,7 @@ jobs:
       - name: Get tag name
         id: gettagname
         run: |
-          echo ${{ github.ref_name }} | sed -e 's/^v//' | xargs -I {} echo "tagname={}" >> "$GITHUB_OUTPUT"
+          echo "tagname=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
       - uses: actions/download-artifact@v4
         with:
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: linux-arm64
-          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-ard64.tar.gz
+          path: release/ghq-fzf-${{ steps.gettagname.outputs.tagname }}-linux-arm64.tar.gz
 
       - uses: actions/download-artifact@v4
         with:
