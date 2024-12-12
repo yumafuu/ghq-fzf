@@ -18,6 +18,7 @@ jobs:
           repository: "yumafuu/homebrew-tap"
           fetch-depth: 0
           path: homebrew-tap
+          token: ${{ secrets.TAP_GITHUB_TOKEN }}
 
       - name: Generate Homebrew Formula
         run: |
