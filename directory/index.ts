@@ -1,4 +1,4 @@
-import { GetConfig } from "../config";
+import { config } from "../config";
 
 type Item = {
   fullpath: string;
@@ -6,8 +6,6 @@ type Item = {
 };
 
 export const GetDirs = async ($): Promise<Item[]> => {
-  const config = await GetConfig();
-
   const ghqroot = (await $`ghq root`.text()).trim();
   const ghqlist = (await $`ghq list`.text()).split("\n").filter(Boolean);
 
@@ -18,7 +16,7 @@ export const GetDirs = async ($): Promise<Item[]> => {
 
   for (const dir of config.dirs) {
     // replace ~ which is first char with $HOME
-    const fullpath = dir.replace(/^~/, process.env.HOME);
+    const fullpath = dir.replace(/^~/, Bun.env.HOME);
     list.push({ fullpath , display: dir });
   }
 

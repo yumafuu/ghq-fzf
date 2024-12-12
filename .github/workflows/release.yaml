@@ -25,7 +25,7 @@ jobs:
 
       - name: Compile
         run: |
-          bun i && bun build ./cli.ts --compile --target=bun-${{ matrix.target }} --outfile ${{ matrix.target }}
+          bun i && bun build  --compile --minify --sourcemap ./cli.ts --target=bun-${{ matrix.target }} --outfile ${{ matrix.target }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
