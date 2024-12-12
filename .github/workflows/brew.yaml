@@ -1,0 +1,29 @@
+name: brew tap
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  homebrew-release:
+    runs-on: ubuntu-latest
+    name: homebrew-release
+    needs:
+      - release
+    steps:
+      - name: Release project to Homebrew tap
+        uses: Justintime50/homebrew-releaser@v2
+        with:
+          homebrew_owner: yumafuu
+          homebrew_tap: homebrew-tap
+          formula_folder: "."
+          github_token: ${{ secrets.TAP_GITHUB_TOKEN }}
+          commit_owner: yumafuu
+          commit_email: yuma.fuu05@gmail.com
+          install: 'bin.install "_ghq-fzf"'
+          target_darwin_amd64: true
+          target_darwin_arm64: true
+          target_linux_amd64: true
+          target_linux_arm64: true
+          skip_commit: true
+          debug: true
