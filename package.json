@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "compile": "bun build ./cli.ts --compile --outfile _ghq-fzf"
+    "compile": "bun build ./cli.ts --compile --outfile _ghq-fzf",
+    "local": "bun run ./cli.ts"
   },
   "dependencies": {
     "yaml": "^2.6.1"

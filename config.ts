@@ -4,7 +4,11 @@ type Config = {
   fzf: {
     preview: string;
   };
-  dirs: string[];
+  nested: Array<{
+    root: string;
+    dirs: string[];
+  }>;
+  external: string[];
 };
 
 const DEFAULT_CONFIG = `${Bun.env.HOME}/.config/ghq-fzf/config.yaml`;

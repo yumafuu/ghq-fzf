@@ -6,7 +6,7 @@ export const Run: Command = async ($) => {
   const dirs = await GetDirs($);
   const fzfitem = dirs.map((item) => item.display).join("\n");
 
-  const preview = config.fzf?.preview || "echo {}";
+  const preview = config?.fzf?.preview || "echo {}";
 
   const selected =
     (await $`echo ${fzfitem} | fzf --preview '${preview}'`.text())

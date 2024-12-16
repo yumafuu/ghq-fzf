@@ -2,6 +2,7 @@ import {
   Run as RunCommand,
   List as ListCommand,
   Fullpath as FullpathCommand,
+  Help as HelpCommand,
 } from "./command";
 import type { Command } from "./command";
 import type { ShellRunner } from "./shell";
@@ -10,21 +11,7 @@ const commandMapping: { [key: string]: Command } = {
   "run": RunCommand,
   "fullpath": FullpathCommand,
   "list": ListCommand,
-  "help": (_, __) => {
-    console.log(`ghq-fzf:
-
-USAGE:
-run:
-  Search and change dir
-
-fullpath <target>:
-  Show fullpath of the directory
-
-list:
-  List all directories
-`)
-  }
-  ,
+  "help": HelpCommand,
  }
 
 export const Runner = async (
