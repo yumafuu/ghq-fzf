@@ -2,6 +2,7 @@ import { parseArgs } from "util";
 import { $ } from "bun";
 import { Runner } from "./src/runner.ts";
 import { modulesContainer } from "./src/module/index.ts";
+import { GetConfig } from "./src/config/config.ts";
 
 const { positionals } = parseArgs({
   args: Bun.argv.slice(2),
@@ -16,4 +17,6 @@ if (!command) {
 }
 const args = positionals.slice(1);
 
-Runner($, modulesContainer, command, args);
+const config = await GetConfig();
+
+Runner($, modulesContainer, config, command, args);
