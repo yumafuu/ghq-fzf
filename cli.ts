@@ -1,7 +1,7 @@
 import { parseArgs } from "util";
 import { $ } from "bun";
 import { Runner } from "./src/runner.ts";
-import { printConsole } from "./src/output.ts";
+import { modulesContainer } from "./src/module/index.ts";
 
 const { positionals } = parseArgs({
   args: Bun.argv.slice(2),
@@ -16,4 +16,4 @@ if (!command) {
 }
 const args = positionals.slice(1);
 
-Runner($, printConsole, command, args);
+Runner($, modulesContainer, command, args);

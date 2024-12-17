@@ -1,8 +1,10 @@
 import { ShellRunner } from "../shell";
+import { ModulesContainer } from "../module";
 
 export type Command = (
   shellRunner: ShellRunner,
-  args: string[]
+  args: string[],
+  module: ModulesContainer
 ) => Promise<string>;
 
 export { List } from "./list";

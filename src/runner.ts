@@ -4,9 +4,10 @@ import {
   Fullpath as FullpathCommand,
   Help as HelpCommand,
 } from "./command";
+
 import type { Command } from "./command";
-import type { ShellRunner } from "./shell";
-import type { IOutput } from "./output";
+import type { ShellRunner } from "./module/shell/types.ts";
+import type { ModulesContainer } from "./module/index.ts";
 
 const commandMapping: { [key: string]: Command } = {
   "run": RunCommand,
@@ -17,15 +18,15 @@ const commandMapping: { [key: string]: Command } = {
 
 export const Runner = async (
   shellRunner: ShellRunner,
-  output: IOutput,
+  modules: ModulesContainer,
   command: string,
   args: string[],
 ) => {
   const commandFn = commandMapping[command];
 
   if (commandFn) {
-    const result = await commandFn(shellRunner, args);
-    output.print(result);
+    const result = await commandFn(shellRunner, args, modules);
+    modules.output.print(result);
   } else {
     console.error(`Unknown command: ${command}`);
   }
