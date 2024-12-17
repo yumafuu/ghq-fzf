@@ -1,8 +1,7 @@
 import type { Command } from ".";
-import { GetDirs } from "../directory";
 
-export const Help: Command = async ($, args: string[]) => {
-  console.log(`ghq-fzf:
+export const Help: Command = async (_$, _args: string[]): Promise<string> => {
+  return `ghq-fzf:
 
 USAGE:
 run:
@@ -13,5 +12,5 @@ Show fullpath of the directory
 
 list:
 List all directories
-`)
+`
 };

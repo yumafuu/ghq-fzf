@@ -1,9 +1,13 @@
 import { ShellRunner } from "../shell";
+import { ModulesContainer } from "../module";
+import { Config } from "../config/config.ts";
 
 export type Command = (
   shellRunner: ShellRunner,
-  args: string[]
-) => Promise<void>;
+  args: string[],
+  module: ModulesContainer,
+  config: Config,
+) => Promise<string>;
 
 export { List } from "./list";
 export { Run } from "./run";

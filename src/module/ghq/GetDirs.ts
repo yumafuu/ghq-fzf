@@ -1,11 +1,11 @@
-import { config } from "../config";
+import type { Config } from "../../config/config.ts";
+import type { GhqItem } from "./index.ts";
+import type { ShellRunner } from "../shell/types.ts";
 
-type Item = {
-  fullpath: string;
-  display: string;
-};
-
-export const GetDirs = async ($): Promise<Item[]> => {
+export const GetDirs = async (
+  $: ShellRunner,
+  config: Config,
+): Promise<GhqItem[]> => {
   const ghqroot = (await $`ghq root`.text()).trim();
   const ghqlist = (await $`ghq list`.text()).split("\n").filter(Boolean);
   const nestedList = config?.nested?.reduce((acc, item) => {
@@ -14,7 +14,7 @@ export const GetDirs = async ($): Promise<Item[]> => {
   }, {}) || {};
 
 
-  const list: Item[] = [];
+  const list: GhqItem[] = [];
   for (const ghqitem of ghqlist) {
     const additions = nestedList[ghqitem] || [];
     list.push({ fullpath: `${ghqroot}/${ghqitem}`, display: ghqitem });
