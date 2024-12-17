@@ -60,7 +60,7 @@ This specifies what will be displayed in the fzf preview window. The string conf
 fzf:
   preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
   # preview: "bat $(_ghq-fzf fullpath {})/README.md"
-  # preview: "ls {}"
+  # `_ghq-fzf fullpath` is a helper command designed to obtain the full paths of both ghq-managed directories and any externally configured directories.
 ```
 
 Reference: https://github.com/junegunn/fzf#preview-window
