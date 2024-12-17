@@ -1,18 +1,9 @@
 import { expect, test } from "bun:test";
 import { NewTestShellRunner } from "../../test/shell.ts";
-import { NewTestModules } from "../../test/modules.ts";
 import { NewMockConfig } from "../../test/config.ts";
-
-import type { GhqItem } from "./index.ts";
-import type { Config } from "../../config/config.ts";
-import type { ShellRunner } from "../shell/types.ts";
 
 import { GetDirs } from "./GetDirs.ts";
 
-const mockPaths: GhqItem[] = [
-  { fullpath: "/path/to/test1", display: "path1" },
-  { fullpath: "/path/to/test2", display: "path2" },
-]
 const mockConfig = NewMockConfig("", [], ["/add1", "/add2"]);
 const TestShellRunner = NewTestShellRunner({
   "ghq list": "path1\npath2",
