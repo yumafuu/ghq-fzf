@@ -6,6 +6,7 @@ import {
 } from "./command";
 import type { Command } from "./command";
 import type { ShellRunner } from "./shell";
+import type { IOutput } from "./output";
 
 const commandMapping: { [key: string]: Command } = {
   "run": RunCommand,
@@ -16,13 +17,15 @@ const commandMapping: { [key: string]: Command } = {
 
 export const Runner = async (
   shellRunner: ShellRunner,
+  output: IOutput,
   command: string,
   args: string[],
 ) => {
   const commandFn = commandMapping[command];
 
   if (commandFn) {
-    await commandFn(shellRunner, args);
+    const result = await commandFn(shellRunner, args);
+    output.print(result);
   } else {
     console.error(`Unknown command: ${command}`);
   }

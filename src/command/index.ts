@@ -3,7 +3,7 @@ import { ShellRunner } from "../shell";
 export type Command = (
   shellRunner: ShellRunner,
   args: string[]
-) => Promise<void>;
+) => Promise<string>;
 
 export { List } from "./list";
 export { Run } from "./run";

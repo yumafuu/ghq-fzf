@@ -1,8 +1,8 @@
 import { config } from "../config";
 import type { Command } from ".";
-import { GetDirs } from "../directory";
+import { GetDirs } from "../module/GetDirs";
 
-export const Run: Command = async ($) => {
+export const Run: Command = async ($): Promise<string> => {
   const dirs = await GetDirs($);
   const fzfitem = dirs.map((item) => item.display).join("\n");
 
@@ -15,10 +15,11 @@ export const Run: Command = async ($) => {
   if (selected) {
     const item = dirs.find((item) => item.display === selected);
     if (!item) {
-      console.error("Item not found");
-      return
+      return "Item not found"
     }
 
-    console.log(`cd ${item.fullpath}`);
+    return `cd ${item.fullpath}`
   }
+
+  return "";
 };
