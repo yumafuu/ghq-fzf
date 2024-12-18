@@ -20,5 +20,5 @@ test("[OK] get dirs correctory", async () => {
     { fullpath: "/add1", display: "/add1" },
     { fullpath: "/add2", display: "/add2" },
   ]
-  expect(Bun.deepEquals(result, want)).toBe(true);
+  expect(result).toMatchObject(want);
 });
