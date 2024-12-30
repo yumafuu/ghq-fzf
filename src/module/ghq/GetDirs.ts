@@ -6,9 +6,11 @@ export const GetDirs = async (
   $: ShellRunner,
   config: Config,
 ): Promise<GhqItem[]> => {
+  const showFullpath = config.ghq.showFullpath
+
   const ghqroot = (await $`ghq root`.text()).trim();
-  const ghqlist = (await $`ghq list`.text()).split("\n").filter(Boolean);
-  const nestedList = config?.nested?.reduce((acc, item) => {
+  const ghqlist = (await $`ghq list ${showFullpath ? "-p" : ""}`.text()).split("\n").filter(Boolean);
+  const nestedList = config.ghq.nested.reduce((acc, item) => {
     acc[item.root] = item.dirs;
     return acc;
   }, {}) || {};
@@ -16,20 +18,26 @@ export const GetDirs = async (
 
   const list: GhqItem[] = [];
   for (const ghqitem of ghqlist) {
+    let fullpath = "";
+    if (showFullpath) {
+      fullpath = ghqitem;
+    } else {
+      fullpath = `${ghqroot}/${ghqitem}`;
+    }
+    list.push({ fullpath, display: ghqitem });
+
     const additions = nestedList[ghqitem] || [];
-    list.push({ fullpath: `${ghqroot}/${ghqitem}`, display: ghqitem });
-
     for (const dir of additions) {
-      const fullpath = `${ghqroot}/${ghqitem}/${dir}`;
-      const display = `${ghqitem}/${dir}`;
+      const addFullpath = `${fullpath}/${dir}`;
+      const addDisplay = `${ghqitem}/${dir}`;
 
-      list.push({ fullpath, display });
+      list.push({ fullpath: addFullpath, display: addDisplay });
     }
   }
 
   for (const dir of config.external) {
     // replace ~ which is first char with $HOME
-    const fullpath = dir.replace(/^~/, Bun.env.HOME);
+    const fullpath = dir.replace(/^~/, Bun.env.HOME || "");
     list.push({ fullpath , display: dir });
   }
 
