@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.4](https://github.com/yumafuu/ghq-fzf/compare/v0.0.3...v0.0.4) - 2024-12-30
+- [add] showFullpath option by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/32
+
 ## [v0.0.3](https://github.com/yumafuu/ghq-fzf/compare/v0.0.2...v0.0.3) - 2024-12-17
 - Add test by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/28
 
