@@ -54,7 +54,7 @@ If no file was found, create it in the final hit location.
 Below is the content of the YAML file:
 
 ### fzf.preview
-  
+
 This specifies what will be displayed in the fzf preview window. The string configured here will be passed to --preview.
 ```yaml
 fzf:
@@ -66,17 +66,23 @@ fzf:
 Reference: https://github.com/junegunn/fzf#preview-window
 
 
-### nested
-  
-Nested directories under ghq-managed directories will be added to the list. This is useful for monorepos.
+### ghq
+
+showFullpath: true/false
+ghq list will show fullpath or not. ( if true, `ghq list -p` )
+
+Nested: directories under ghq-managed directories will be added to the list. This is useful for monorepos.
 ```yaml
-root: ${ghq-repo} # github.com/yumafuu/ghq-fzf
-dirs:
-  - ${The directory you want to add}
+ghq:
+  showFullpath: true
+  nested:
+    - root: ${ghq-repo} # github.com/yumafuu/ghq-fzf
+      dirs:
+       - ${dir-name}
 ```
 
 ### external
-  
+
 Directories not managed by ghq will also be added to the list.
 
 ```yaml
@@ -93,11 +99,13 @@ fzf:
   # preview: "bat $(_ghq-fzf fullpath {})/README.md"
   preview: "exa --tree -L 2 $(_ghq-fzf fullpath {})"
 
-nested:
-  - root: github.com/yumafuu/ghq-fzf
-    dirs:
-      - src
-      - .github
+ghq:
+  showFullpath: false
+  nested:
+    - root: github.com/yumafuu/ghq-fzf
+      dirs:
+        - src
+        - .github
 
 external:
   - "~/dotfiles"
