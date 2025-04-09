@@ -54,6 +54,10 @@ jobs:
         run: |
           ls -la release/
 
+      - name: DEBUG
+        run: |
+          ls -la release/
+
       - name: Release
         uses: fnkr/github-action-ghr@v1
         env:
