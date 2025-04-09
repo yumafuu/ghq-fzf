@@ -1,6 +1,6 @@
 import { parseArgs } from "util";
 import { $ } from "bun";
-import { Runner } from "./src/runner.ts";
+import { Run } from "./src/run.ts";
 import { modulesContainer } from "./src/module/index.ts";
 import { GetConfig } from "./src/config/config.ts";
 
@@ -19,4 +19,4 @@ const args = positionals.slice(1);
 
 const config = await GetConfig();
 
-Runner($, modulesContainer, config, command, args);
+Run($, modulesContainer, config, command, args);

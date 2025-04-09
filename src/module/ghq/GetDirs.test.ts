@@ -13,6 +13,10 @@ test("[OK] get dirs correctory (ghq showFullpath true)", async () => {
       nested: [
         { root: "/path/to/path1", dirs: ["aa", "bb"] }
       ],
+      exclude: [
+        "/path/to/path1/aa",
+        "/path/to/path2",
+      ],
     },
     external: ["/add1", "/add2"],
   });
@@ -28,7 +32,6 @@ test("[OK] get dirs correctory (ghq showFullpath true)", async () => {
     { fullpath: "/path/to/path1", display: "/path/to/path1" },
     { fullpath: "/path/to/path1/aa", display: "/path/to/path1/aa" },
     { fullpath: "/path/to/path1/bb", display: "/path/to/path1/bb" },
-    { fullpath: "/path/to/path2", display: "/path/to/path2" },
     { fullpath: "/add1", display: "/add1" },
     { fullpath: "/add2", display: "/add2" },
   ]
