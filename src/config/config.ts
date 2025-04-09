@@ -10,6 +10,7 @@ export type Config = {
       root: string;
       dirs: string[];
     }>;
+    exclude: string[];
   }
   external: string[];
 };
@@ -32,6 +33,7 @@ export const FillConfigOptionalFields = (configRaw: any): Config => {
     ghq: {
       showFullpath: configRaw.ghq?.showFullpath || false,
       nested: configRaw.ghq?.nested || [],
+      exclude: configRaw.ghq?.exclude || [],
     },
     external: configRaw.external || [],
   }

@@ -17,7 +17,7 @@ const commandMapping: { [key: string]: Command } = {
   "help": HelpCommand,
  }
 
-export const Runner = async (
+export const Run = async (
   shellRunner: ShellRunner,
   modules: ModulesContainer,
   config: Config,

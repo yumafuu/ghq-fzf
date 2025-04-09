@@ -14,6 +14,7 @@ export const GetDirs = async (
     acc[item.root] = item.dirs;
     return acc;
   }, {}) || {};
+  const excludeList = config.ghq.exclude
 
 
   const list: GhqItem[] = [];
@@ -23,6 +24,11 @@ export const GetDirs = async (
       fullpath = ghqitem;
     } else {
       fullpath = `${ghqroot}/${ghqitem}`;
+    }
+
+    // check if the item is excluded
+    if (excludeList.some((exclude) => ghqitem.includes(exclude))) {
+      continue;
     }
     list.push({ fullpath, display: ghqitem });
 
