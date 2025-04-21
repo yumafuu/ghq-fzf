@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.3](https://github.com/yumafuu/ghq-fzf/compare/v0.0.2...v0.0.3) - 2025-04-21
+- [fix] ci by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/40
+
 ## [v0.0.2](https://github.com/yumafuu/ghq-fzf/compare/v0.0.1...v0.0.2) - 2025-04-21
 - [fix] goreleaser by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/38
 
