@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.5](https://github.com/yumafuu/ghq-fzf/compare/v0.0.4...v0.0.5) - 2025-04-21
+- [fix] ci by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/44
+- [update] readme by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/46
+
 ## [v0.0.4](https://github.com/yumafuu/ghq-fzf/compare/v0.0.3...v0.0.4) - 2025-04-21
 - [fix] bun.lock by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/42
 
