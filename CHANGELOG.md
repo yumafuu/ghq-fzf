@@ -1,5 +1,8 @@
 # Changelog
 
+## [v1.0.1](https://github.com/yumafuu/ghq-fzf/compare/v1.0.0...v1.0.1) - 2025-04-21
+- [fix] binary by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/49
+
 ## [v0.0.5](https://github.com/yumafuu/ghq-fzf/compare/v0.0.4...v0.0.5) - 2025-04-21
 - [fix] ci by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/44
 - [update] readme by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/46
