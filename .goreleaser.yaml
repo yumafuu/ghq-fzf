@@ -3,9 +3,6 @@ builds:
   - id: "ghq-fzf"
     builder: bun
     binary: ghq-fzf
-    # targets:
-    #   - linux-x64-modern
-    #   - darwin-arm64
     main: "cli.ts"
     flags:
       - --minify
@@ -17,13 +14,11 @@ brews:
       name: goreleaserbot
       email: bot@goreleaser.com
     commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
-    # directory: .
-    caveats: "How to use this binary"
     license: "MIT"
     install: |
-      bin.install "darwin-x64" => "_ghq-fzf"
+      bin.install "_ghq-fzf"
     repository:
       owner: yumafuu
       name: homebrew-tap
       branch: main
-      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+      token: "{{ .Env.GITHUB_TOKEN }}"
