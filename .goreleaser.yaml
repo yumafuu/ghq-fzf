@@ -2,7 +2,7 @@ version: 2
 builds:
   - id: "ghq-fzf"
     builder: bun
-    binary: ghq-fzf
+    binary: _ghq-fzf
     main: "cli.ts"
     flags:
       - --minify
