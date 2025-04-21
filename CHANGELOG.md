@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.6](https://github.com/yumafuu/ghq-fzf/compare/v0.0.5...v0.0.6) - 2025-04-21
+- [update] ci by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/35
+- [update] ci by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/37
+
 ## [v0.0.5](https://github.com/yumafuu/ghq-fzf/compare/v0.0.4...v0.0.5) - 2025-04-09
 - [add] exclude by @yumafuu in https://github.com/yumafuu/ghq-fzf/pull/33
 
