@@ -106,6 +106,9 @@ ghq:
       dirs:
         - src
         - .github
+  exclude:
+    - github.com/yumafuu/super-noisy-repo
+
 
 external:
   - "~/dotfiles"
