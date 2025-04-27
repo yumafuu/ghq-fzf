@@ -1,4 +1,5 @@
 {
+  "name": "ghq-fzf",
   "scripts": {
     "compile": "bun build ./cli.ts --compile --outfile _ghq-fzf",
     "local": "bun run ./cli.ts"
@@ -7,6 +8,9 @@
     "yaml": "^2.6.1"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.14"
+    "@types/bun": "^1.2.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }
