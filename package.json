@@ -4,11 +4,8 @@
     "compile": "bun build ./cli.ts --compile --outfile _ghq-fzf",
     "local": "bun run ./cli.ts"
   },
-  "dependencies": {
-    "yaml": "^2.6.1"
-  },
   "devDependencies": {
-    "@types/bun": "^1.2.10"
+    "@types/bun": "^1.2.21"
   },
   "peerDependencies": {
     "typescript": "^5"
