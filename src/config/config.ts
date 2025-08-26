@@ -1,4 +1,4 @@
-import { parse } from "yaml";
+import { YAML } from "bun";
 
 export type Config = {
   fzf: {
@@ -19,7 +19,7 @@ export const GetConfig = async (): Promise<Config> => {
   const DEFAULT_CONFIG = `${Bun.env.HOME}/.config/ghq-fzf/config.yaml`;
   const configFilePath = Bun.env.GHQ_FZF_CONFIG || DEFAULT_CONFIG;
   const configFile = await Bun.file(configFilePath).text();
-  const configRaw: any = parse(configFile);
+  const configRaw: any = YAML.parse(configFile);
 
   const config = FillConfigOptionalFields(configRaw);
   return config;
